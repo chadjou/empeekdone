@@ -1,0 +1,58 @@
+<div ng-controller="FolderCtrl as vm">
+
+    <div>
+
+        <div class="table-responsive">
+            <table class="table">
+                <div ng-show="vm.currPath != 'drivesFolder'">
+                    <button class=" btn btn-link" ng-click="vm.getStatistic(vm.folderData.rootFolder); vm.getFolderData(vm.folderData.rootFolder);">
+                        <span class="glyphicon glyphicon-level-up"></span> Root
+                    </button>
+                </div>
+                <thead>
+                    <tr>
+                        <td colspan=3 ng-class="{aqua: true}"> <span class="glyphicon glyphicon-folder-open"></span>  {{vm.currPath}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in vm.folderData.subFolders">
+                        <td colspan=3 ng-class="{blue: hover}"
+                            ng-mouseenter="hover = true"
+                            ng-mouseleave="hover = false"
+                            ng-click="vm.getStatistic(item); vm.getFolderData(item);">
+                            <span class="glyphicon glyphicon-folder-close"> </span> {{item | onlyname}}
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody>
+                    <tr ng-repeat="item in vm.folderData.files">
+                        <td colspan=3>  <span class="glyphicon glyphicon-file"> </span> {{item | onlyname}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <td ng-class="{aqua: true}" colspan=3> <span class="glyphicon glyphicon-collapse-down"></span> Statistics</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">more than 100 mb</td>
+                    <td class="text-center">10mb-50mb</td>
+                    <td class="text-center">less 10 mb</td>
+                </tr>
+                <tr>
+                    <td class="text-center">{{vm.statistic.bigSize}}</td>
+                    <td class="text-center">{{vm.statistic.middleSize}}</td>
+                    <td class="text-center">{{vm.statistic.smallSize}}</td>
+                </tr>
+            </tbody>
+
+
+        </table>
+    </div>
+</div>
+
